@@ -1,14 +1,12 @@
 import { View, TextInput } from "react-native";
 import React, { useState } from "react";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Task } from "../app";
 import styles from "./styles";
+import { useTask } from "../providers/taskContext";
 
-type newTask = {
-  onAdd: (newTask: Task) => void;
-};
-export default function newTaskInput({ onAdd }: newTask) {
+export default function newTaskInput() {
   const [newTask, setNewTask] = useState<string>("");
+  const { onAddPressed } = useTask();
 
   return (
     <View style={styles.taskContainer}>
@@ -26,11 +24,10 @@ export default function newTaskInput({ onAdd }: newTask) {
           if (!newTask) {
             return;
           }
-          onAdd({ title: newTask, isCompleted: false });
+          onAddPressed(newTask);
           setNewTask("");
         }}
       />
     </View>
   );
 }
-

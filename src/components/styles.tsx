@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     padding: 16,
     marginTop: 50,
     fontSize: 16,
-    height: 50,
     alignSelf: "center",
     backgroundColor: "lightyellow",
     borderWidth: 1,
