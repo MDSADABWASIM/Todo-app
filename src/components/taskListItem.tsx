@@ -4,7 +4,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import styles from "./styles";
-import { Task, useTask } from "../providers/taskContext";
+import { Task, useTaskStore } from "../store/TaskStore";
 
 type TaskListItemType = {
   task: Task;
@@ -28,7 +28,9 @@ function rightActionComponet(onDeletePressed: () => void) {
   );
 }
 const TaskListItem = ({ task }: TaskListItemType) => {
-  const { onItemPressed, onDeletePressed } = useTask();
+  const onItemPressed = useTaskStore((state) => state.onItemPressed);
+  const onDeletePressed = useTaskStore((state) => state.onDeletePressed);
+
   return (
     <GestureHandlerRootView>
       <Swipeable

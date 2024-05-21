@@ -5,10 +5,14 @@ import NewTaskInput from "../components/newTaskInput";
 import { SafeAreaView } from "react-native-safe-area-context";
 import TaskListItem from "../components/taskListItem";
 import styles from "../components/styles";
-import { useTask } from "../providers/taskContext";
+import { useTaskStore } from "../store/TaskStore";
 
 export default function HomeScreen() {
-  const { tasks } = useTask();
+  const tasks = useTaskStore((state) => state.tasks);
+  const numberOfTasks = useTaskStore((state) => state.numberOfTasks());
+  const numberOfCompletedTasks = useTaskStore((state) =>
+    state.numberOfCompletedTasks(),
+  );
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -17,6 +21,7 @@ export default function HomeScreen() {
           title: "TODO",
           headerShadowVisible: false,
           headerTitleAlign: "center",
+          headerTitle: `Todo ${numberOfCompletedTasks}/${numberOfTasks}`,
         }}
       />
 
